@@ -1,0 +1,145 @@
+{
+  "title": "NamerTelemetry",
+  "type": "object",
+  "description": "1HZ telemetry from external vehicles",
+  "examples": [
+    {
+      "droneId": "12345",
+      "energy": 50,
+      "creationTimestamp": 123456789,
+      "location": {
+        "lat": 32.23,
+        "lon": 34.45
+      },
+      "altASL": 650,
+      "heading": 100,
+      "gimbalAngles": {
+        "yaw": 23.45,
+        "pitch": -33.4,
+        "roll": 45.3
+      },
+      "velocity": {
+        "x": 9.5,
+        "y": 7.3,
+        "z": 0
+      },
+      "bodyAngles": {
+        "q0": 0.893206,
+        "q1": 0.001921,
+        "q2": 0.006001,
+        "q3": -0.449604
+      },
+      "accelerations": {
+        "x": -0.002456,
+        "y": 0.00385,
+        "z": -0.011332
+      },
+      "barometrucAltASL": 670.56,
+      "GnssAltASL": 766.6,
+      "cameraMode": "Day",
+      "cameraZoom": 5,
+      "armed": true,
+      "homePoint": {
+        "lat": 32.45,
+        "lon": 34.33,
+        "alt": 70.6
+      },
+      "route": [
+        {
+          "waypoint": {
+            "lat": 32.2,
+            "lon": 34.55
+          },
+          "velocity": 10,
+          "altASL": 770.6
+        },
+        {
+          "waypoint": {
+            "lat": 32.3,
+            "lon": 34.65
+          },
+          "velocity": 10,
+          "altASL": 775.7
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "droneId": {
+      "type": "string"
+    },
+    "energy": {
+      "type": "number",
+      "maximum": 100,
+      "minimum": 0,
+      "description": "The drone remaining energy in %"
+    },
+    "creationTimestamp": {
+      "$ref": "../GeneralTypes/timestamp.json"
+    },
+    "location": {
+      "$ref": "../GeneralTypes/location2D.json"
+    },
+    "altASL": {
+      "type": "number",
+      "description": "The altitude above sea level in meters to centimeters accurrecy. The ASL altitude is calculated as TakeOff DTM point + alt above takeoff point"
+    },
+    "heading": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 360,
+      "description": "The drone heading in degrees reffernced to the true North. Accurecy of at least 1/10 of degree"
+    },
+    "gimbalAngles": {
+      "$ref": "../GeneralTypes/gimbalAngles.json"
+    },
+    "velocity": {
+      "$ref": "../GeneralTypes/droneVelocity.json"
+    },
+    "bodyAngles": {
+      "$ref": "../GeneralTypes/droneQuaternion.json"
+    },
+    "accelerations": {
+      "$ref": "../GeneralTypes/droneAccelarations.json"
+    },
+    "barometrucAltASL": {
+      "type": "number",
+      "description": "The altitude above sea level recieved from the narometer in meters to centimeters accurrecy"
+    },
+    "GnssAltASL": {
+      "type": "number",
+      "description": "The GNSS altitude ASL in meters.12"
+    },
+    "cameraMode": {
+      "type": "string",
+      "enum": [
+        "Day",
+        "Night"
+      ],
+      "description": "Day or night modes"
+    },
+    "cameraZoom": {
+      "type": "number",
+      "description": "The camera zoom in X multiple) e.g X5"
+    },
+    "armed": {
+      "type": "boolean"
+    },
+    "homePoint": {
+      "$ref": "../GeneralTypes/location3D.json"
+    },
+    "route": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "../GeneralTypes/pointOfRoute.json"
+      }
+    }
+  },
+  "required": [
+    "droneId",
+    "energy",
+    "altASL",
+    "armed"
+  ]
+}
